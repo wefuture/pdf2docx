@@ -25,6 +25,7 @@ Data structure based on this `link <https://pymupdf.readthedocs.io/en/latest/tex
     }
 '''
 
+import logging
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from .Lines import Lines
@@ -319,13 +320,16 @@ class TextBlock(Block):
         .. note::
             The left position of paragraph is set by paragraph indent, rather than ``TAB`` stop.
         '''
-        pf = docx.reset_paragraph_format(p)
+       
+        pf = docx.reset_paragraph_format( p )
 
         # vertical spacing
-        before_spacing = max(round(self.before_space, 1), 0.0)
-        after_spacing = max(round(self.after_space, 1), 0.0)
+        before_spacing = min(50, max(round(self.before_space, 1), 0.0) )
+        after_spacing = min(50, max(round(self.after_space, 1), 0.0) )
         pf.space_before = Pt(before_spacing)
-        pf.space_after = Pt(after_spacing)        
+        pf.space_after = Pt(after_spacing)       
+        logging.info('text block段前间距'+ str( before_spacing ) )
+        logging.info('text block段后间距'+ str( after_spacing ) ) 
 
         # line spacing
         pf.line_spacing = round(self.line_space, 2)

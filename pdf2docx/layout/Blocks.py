@@ -3,6 +3,7 @@
 '''A group of ``TextBlock``, ``ImageBlock`` or ``TableBlock``.
 '''
 
+import logging
 from docx.shared import Pt
 from ..common import constants
 from ..common.Collection import ElementCollection
@@ -512,7 +513,8 @@ class Blocks(ElementCollection):
             if table_block.before_space>=constants.MIN_LINE_SPACING or pre_table:
                 h = int(10*table_block.before_space)/10.0 # round(x,1), but to lower bound
                 p = doc.add_paragraph()
-                reset_paragraph_format(p, line_spacing=Pt(h))
+                logging.info('reset_paragraph_format:'+ str( min(h, 11) ) )
+                reset_paragraph_format(p, line_spacing=Pt(  min(h, 11) ))
 
             # new table            
             table = doc.add_table(rows=table_block.num_rows, cols=table_block.num_cols)

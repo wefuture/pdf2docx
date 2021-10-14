@@ -195,6 +195,7 @@ class Converter:
             if not page.finalized: continue # ignore unparsed pages
             logging.info('(%d/%d) Page %d', i, num_pages, page.id+1)
             try:
+                logging.info(' Page %d', page.id+1)
                 page.make_docx(docx_file)
             except Exception as e:
                 logging.error('Ignore page due to error: %s', e)

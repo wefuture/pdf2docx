@@ -39,6 +39,7 @@ Page elements structure:
 
 '''
 
+import logging
 from docx.shared import Pt
 from docx.enum.section import WD_SECTION
 from ..common.Collection import BaseCollection
@@ -184,8 +185,10 @@ class Page(BasePage):
         # new page
         if doc.paragraphs:
             section = doc.add_section(WD_SECTION.NEW_PAGE)
+            # logging.info('WD_SECTION.NEW_PAGE')
         else:
             section = doc.sections[0] # a default section is there when opening docx
+            # logging.info('not WD_SECTION.NEW_PAGE')
 
         # page size
         section.page_width  = Pt(self.width)
@@ -197,6 +200,8 @@ class Page(BasePage):
         section.right_margin = Pt(right)
         section.top_margin = Pt(top)
         section.bottom_margin = Pt(bottom)
+
+        logging.info('margin left: ' + str( section.left_margin ) )
 
         # create flow layout: sections
         self.sections.make_docx(doc)

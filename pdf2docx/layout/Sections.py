@@ -8,6 +8,7 @@ from docx.shared import Pt
 from ..common.Collection import BaseCollection
 from ..common.docx import reset_paragraph_format
 from .Section import Section
+import logging
 
 
 class Sections(BaseCollection):
@@ -34,9 +35,11 @@ class Sections(BaseCollection):
 
         def create_dummy_paragraph_for_section(section):
             p = doc.add_paragraph()
-            line_height = min(section.before_space, 11)
+            line_height = min( max( section.before_space, 1), 11)
+            logging.info('line_height 0,  '+ str( line_height ) )
             pf = reset_paragraph_format(p, line_spacing=Pt(line_height))
-            pf.space_after = Pt(section.before_space-line_height)
+            pf.space_after = Pt( max(section.before_space-line_height, 10) )
+            logging.info('段后间距1'+ str( pf.space_after ) )
             return p
 
         # ---------------------------------------------------
@@ -68,7 +71,7 @@ class Sections(BaseCollection):
                 p = doc.paragraphs[-1]
             pf = p.paragraph_format
             pf.space_after = Pt(section.before_space)
-            
+            logging.info('段后间距2'+ str( pf.space_after ) )
             # section content
             section.make_docx(doc)
 
