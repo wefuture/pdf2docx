@@ -1,5 +1,5 @@
-# 本版本修改说明
- 实际项目中的效果进行优化
+# project revise indtroduce
+  real project effect optimization
 # pdf2docx 
 
 ![python-version](https://img.shields.io/badge/python->=3.6-green.svg)
