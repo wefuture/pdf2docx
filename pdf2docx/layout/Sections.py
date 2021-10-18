@@ -19,6 +19,7 @@ class Sections(BaseCollection):
         for raw in raws:
             section = Section().restore(raw)
             self.append(section)
+            
         return self
     
 

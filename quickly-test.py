@@ -13,7 +13,8 @@ def main():
     
     cv = Converter( pdf_file )
     settings = {
-        'min_section_height': 0
+        'min_section_height': 0,
+        'debug': True
     }
     cv.convert(docx_file, start=0, end=None, **settings) # Hay que corregir el quitar '.pdf' ya que queda en el nombre del archivo
     cv.close()

@@ -21,6 +21,7 @@ to distinguish these different layouts.
     }
 '''
 
+import logging
 from ..common.Block import Block
 from ..common.Collection import Collection
 from ..common.Element import Element
@@ -48,6 +49,8 @@ class Column(Element, Layout):
         shapes = [e for e in elements if isinstance(e, Shape)]
         self.assign_blocks(blocks)
         self.assign_shapes(shapes)
+        
+        # logging.info('Section.py Sections: ', str( shapes ) )
 
 
     def store(self):

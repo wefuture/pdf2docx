@@ -145,6 +145,7 @@ class Page(BasePage):
         '''Parse page layout.'''
         self.sections.parse(**settings)
         self._finalized = True
+      
         return self.sections # for debug plot
 
 

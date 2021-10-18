@@ -20,6 +20,7 @@ to distinguish these different layouts.
     }
 '''
 
+import logging
 from docx.enum.section import WD_SECTION
 from ..common.docx import set_columns
 from ..common.Collection import BaseCollection
@@ -72,7 +73,8 @@ class Section(BaseCollection):
 
     def parse(self, **settings):
         '''Parse section layout.'''
-        for column in self: column.parse(**settings)        
+        for column in self: 
+            column.parse(**settings)
         return self
     
 

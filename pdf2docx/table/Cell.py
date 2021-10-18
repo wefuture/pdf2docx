@@ -3,6 +3,7 @@
 '''Table Cell object.
 '''
 
+import logging
 from docx.shared import Pt
 from ..common.Element import Element
 from ..layout.Layout import Layout
@@ -18,6 +19,9 @@ class Cell(Element, Layout):
         self.border_color = raw.get('border_color', (0,0,0,0)) # type: tuple [int]
         self.border_width = raw.get('border_width', (0,0,0,0)) # type: tuple [float]
         self.merged_cells = raw.get('merged_cells', (1,1)) # type: tuple [int]
+        
+        self.bg_color     = None
+        # logging.info('cell.py Cell Style: ' + str( self.bg_color ) )
 
         # restore layout
         Layout.__init__(self, blocks=None, shapes=None) # init empty layout
@@ -102,6 +106,7 @@ class Cell(Element, Layout):
         '''        
         # set cell style, e.g. border, shading, cell width
         self._set_style(table, indexes)
+    
         
         # ignore merged cells
         if not bool(self):  return
